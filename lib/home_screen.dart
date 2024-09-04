@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
           Expanded(
             child: FutureBuilder(
               future: getPostApi(),
-              builder: (context, snapshot) {
+              builder: (context, snapshot) { //context is the starting point //snapshot is the widget state
                 if (!snapshot.hasData) {
                   return Center(child: CircularProgressIndicator());
                 } else {
