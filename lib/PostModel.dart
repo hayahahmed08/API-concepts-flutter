@@ -1,46 +1,24 @@
 class PostModel {
-  PostModel({
-      num userId, 
-      num id, 
-      String title, 
-      String body,}){
-    _userId = userId;
-    _id = id;
-    _title = title;
-    _body = body;
-}
+  int? userId;
+  int? id;
+  String? title;
+  String? body;
 
-  PostModel.fromJson(dynamic json) {
-    _userId = json['userId'];
-    _id = json['id'];
-    _title = json['title'];
-    _body = json['body'];
+  PostModel({this.userId, this.id, this.title, this.body});
+
+  PostModel.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
+    id = json['id'];
+    title = json['title'];
+    body = json['body'];
   }
-  num _userId;
-  num _id;
-  String _title;
-  String _body;
-PostModel copyWith({  num userId,
-  num id,
-  String title,
-  String body,
-}) => PostModel(  userId: userId ?? _userId,
-  id: id ?? _id,
-  title: title ?? _title,
-  body: body ?? _body,
-);
-  num get userId => _userId;
-  num get id => _id;
-  String get title => _title;
-  String get body => _body;
 
   Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['userId'] = _userId;
-    map['id'] = _id;
-    map['title'] = _title;
-    map['body'] = _body;
-    return map;
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userId'] = this.userId;
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['body'] = this.body;
+    return data;
   }
-
 }
