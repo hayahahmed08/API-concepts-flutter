@@ -34,6 +34,35 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: Column(
         children: [
+          Expanded(
+            child: FutureBuilder(
+              future: getPostApi(),
+              builder: (context, snapshot) { //context is the starting point //snapshot is the widget state
+                if (!snapshot.hasData) {
+                  return Center(child: CircularProgressIndicator());
+                } else {
+                  return ListView.builder(
+                    itemCount: postList.length,
+                    itemBuilder: (context, index) {
+                      return Card(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text('Title\n' + postList[index].title.toString()),
+                              Text('Description\n' + postList[index].body.toString()),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
         ],
       ),
     );
