@@ -18,9 +18,13 @@ class _ExampleTwoState extends State<ExampleTwo> {
         .get(Uri.parse('https://jsonplaceholder.typicode.com/photos'));
     var data = jsonDecode(response.body.toString());
     if (response.statusCode == 200) {
-      for (Map i in data){
-       Photos photos= Photos(title: i['title'], url: i['url']); //photos is the name of the object you're creating. Photos(title: i['title'], url: i['url']) is the constructor of the Photos class that is being called with two arguments: title and url.
-       photoslist.add(photos);
+      for (Map i in data) {
+        Photos photos = Photos(
+            title: i['title'],
+            id: i['id'],
+            url: i[
+                'url']); //photos is the name of the object you're creating. Photos(title: i['title'], url: i['url']) is the constructor of the Photos class that is being called with two arguments: title and url.
+        photoslist.add(photos);
       }
       return photoslist;
       //200 means request is valid
@@ -28,7 +32,6 @@ class _ExampleTwoState extends State<ExampleTwo> {
       return photoslist;
     }
   } //creating future function tht waits for future value and return type is list with its model
-
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,25 @@ class _ExampleTwoState extends State<ExampleTwo> {
       ),
       body: Column(
         children: [
-
+          Expanded(
+            child: FutureBuilder<List<Photos>>(
+                future: getPhotos(),
+                builder: (context, AsyncSnapshot<List<Photos>> snapshot) {
+                  return ListView.builder(
+                      itemCount: photoslist.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(
+                                snapshot.data![index].url.toString()),
+                          ),
+                          title: Text(snapshot.data![index].title.toString()),
+                          subtitle: Text("Notes id: " +
+                              snapshot.data![index].id.toString()),
+                        );
+                      });
+                }),
+          )
         ],
       ),
     );
@@ -47,7 +68,6 @@ class _ExampleTwoState extends State<ExampleTwo> {
 
 class Photos {
   String title, url;
-  Photos({required this.title, required this.url});
+  int id;
+  Photos({required this.title, required this.url, required this.id});
 }
-
-
