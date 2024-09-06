@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'PostModel.dart';
 
 class ExampleTwo extends StatefulWidget {
   const ExampleTwo({super.key});
