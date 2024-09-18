@@ -42,8 +42,6 @@ class _ExampleThreeState extends State<ExampleThree> {
             child: FutureBuilder<List<UserModel>>(
               future: getUserApi(),
               builder: (context, AsyncSnapshot<List<UserModel>> snapshot) {
-                // Show a loading indicator while fetching data
-                // Display error message if something goes wrong
                  if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 }
@@ -66,7 +64,6 @@ class _ExampleThreeState extends State<ExampleThree> {
                     },
                   );
                 }
-                // Display message if no data is available
                 else {
                   return const Center(child: Text('No Data Available'));
                 }
